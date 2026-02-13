@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Anza ❤️</title>
+
+<style>
+
+/* BODY */
+
+body {
+
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+
+    color: white;
+    text-align: center;
+}
+
+
+/* GIFT IMAGE */
+
+.gift-box img {
+
+    width: 200px;
+
+    cursor: pointer;
+
+    transition: transform 0.4s;
+
+}
+
+.gift-box img:hover {
+
+    transform: scale(1.1);
+
+}
+
+
+/* MESSAGE */
+
+#message {
+
+    margin-top: 30px;
+
+    font-size: 24px;
+
+    width: 80%;
+
+    min-height: 120px;
+
+}
+
+
+/* HEART AFTER OPEN */
+
+.heart {
+
+    font-size: 100px;
+
+    animation: pulse 1s infinite;
+
+}
+
+@keyframes pulse {
+
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+
+}
+
+
+/* FLOATING LETTERS */
+
+.floating-letter {
+
+    position: absolute;
+
+    font-weight: bold;
+
+    color: white;
+
+    animation: floatLetter linear infinite;
+
+    opacity: 0.8;
+
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+
+}
+
+@keyframes floatLetter {
+
+    from {
+
+        transform: translateY(100vh) scale(0.8);
+        opacity: 1;
+
+    }
+
+    to {
+
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+
+<h1>For Anza ❤️</h1>
+
+
+<div class="gift-box" onclick="openGift()" id="gift">
+
+    <img src="gift.png" alt="Gift">
+
+</div>
+
+
+<div id="message"></div>
+
+
+<audio id="song" loop>
+    <source src="shy.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+
+/* MESSAGE */
+
+const text = `Happy Valentine's Day, Anza ❤️
+
+I wish I could give you a real gift today.
+
+But right now, I don't have money to buy something special for you.
+
+So I used the only thing I have — my skills, my time, and my heart — to create this for you.
+
+Because you deserve something meaningful.
+
+This may just be code, but the feelings behind it are real.
+
+You are special, Anza.
+
+– Rorisang ❤️`;
+
+
+let i = 0;
+let opened = false;
+
+
+/* OPEN GIFT */
+
+function openGift() {
+
+    if (opened) return;
+
+    opened = true;
+
+    document.getElementById("gift").innerHTML =
+        "<div class='heart'>❤️</div>";
+
+    document.getElementById("song").play();
+
+    typeMessage();
+
+}
+
+
+/* TYPE MESSAGE */
+
+function typeMessage() {
+
+    if (i < text.length) {
+
+        document.getElementById("message").innerHTML += text.charAt(i);
+
+        i++;
+
+        setTimeout(typeMessage, 40);
+
+    }
+
+}
+
+
+/* FLOATING LETTERS */
+
+const nameLetters = ["Anza ❤️", "Anza ❤️", "Anza ❤️", "Anza ❤️", "Anza ❤️"];
+
+
+function createFloatingLetter() {
+
+    const letter = document.createElement("div");
+
+    letter.className = "floating-letter";
+
+    letter.innerHTML =
+        nameLetters[Math.floor(Math.random() * nameLetters.length)];
+
+    letter.style.left = Math.random() * 100 + "vw";
+
+    letter.style.animationDuration =
+        (Math.random() * 4 + 4) + "s";
+
+    letter.style.fontSize =
+        (Math.random() * 20 + 20) + "px";
+
+    document.body.appendChild(letter);
+
+    setTimeout(() => {
+
+        letter.remove();
+
+    }, 8000);
+
+}
+
+
+setInterval(createFloatingLetter, 300);
+
+
+</script>
+
+
+</body>
+</html>
